@@ -35,4 +35,5 @@ jobs:
       - name: Publish
         working-directory: ./src/Devity.NETCore.MailKit
         run: |
-          dotnet nuget push */*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
+          cd bin/Release
+          dotnet nuget push *.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
