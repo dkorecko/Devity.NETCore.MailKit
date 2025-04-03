@@ -9,6 +9,7 @@
     <Description>Maintained MailKit extension for ASP.NET Core. Send e-mail easily in an ASP.NET Core project. See release notes at: https://github.com/dkorecko/Devity.NETCore.MailKit/releases</Description>
     <Copyright>Copyright 2017-2025 (c) Lvcc, Dávid Korečko. All rights reserved</Copyright>
     <PackageProjectUrl>https://github.com/dkorecko/Devity.NETCore.MailKit</PackageProjectUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/dkorecko/Devity.NETCore.MailKit</RepositoryUrl>
     <PackageTags>MailKit ASP.NET Devity Email SMTP</PackageTags>
     <RepositoryType>git</RepositoryType>
@@ -20,6 +21,10 @@
     <Compile Remove="Core\Internal\**" />
     <EmbeddedResource Remove="Core\Internal\**" />
     <None Remove="Core\Internal\**" />
+  </ItemGroup>
+
+  <ItemGroup Label="Resources">
+    <None Include="..\README.md" Pack="true" PackagePath="\" />
   </ItemGroup>
 
   <ItemGroup>
