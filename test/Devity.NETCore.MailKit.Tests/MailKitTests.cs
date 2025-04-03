@@ -41,7 +41,7 @@ namespace Devity.NETCore.MailKit.Tests
 
             //Assert
             Assert.IsType<ArgumentException>(excetpion);
-            Assert.Equal("collection not be empty.\r\nParameter name: mailTo", excetpion.Message);
+            Assert.Equal("collection not be empty. (Parameter 'mailTo')", excetpion.Message);
         }
 
         [Fact(DisplayName = "MailToOneTest")]

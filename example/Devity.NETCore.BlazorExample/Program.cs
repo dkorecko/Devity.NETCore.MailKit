@@ -7,8 +7,6 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorComponents().AddInteractiveServerComponents();
 
-builder.Services.AddMvc();
-
 var mailKitOptions = builder.Configuration.GetSection("Email").Get<MailKitOptions>();
 builder.Services.AddMailKit(config => config.UseMailKit(mailKitOptions));
 

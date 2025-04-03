@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\NETCore.MailKit\Devity.NETCore.MailKit.csproj" />
+    <ProjectReference Include="..\..\src\Devity.NETCore.MailKit\Devity.NETCore.MailKit.csproj" />
   </ItemGroup>
 
 </Project>
