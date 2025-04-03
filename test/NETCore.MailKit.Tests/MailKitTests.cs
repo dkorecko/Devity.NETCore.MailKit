@@ -1,9 +1,9 @@
-using NETCore.MailKit.Core;
-using NETCore.MailKit.Infrastructure.Internal;
 using System;
+using Devity.NETCore.MailKit.Core;
+using Devity.NETCore.MailKit.Infrastructure.Internal;
 using Xunit;
 
-namespace NETCore.MailKit.Tests
+namespace Devity.NETCore.MailKit.Tests
 {
     public class MailKitTests
     {
@@ -13,15 +13,17 @@ namespace NETCore.MailKit.Tests
 
         public MailKitTests()
         {
-            var provider = new MailKitProvider(new MailKitOptions()
-            {
-                Server = "smtp server address",
-                Port = 25,
-                SenderName = "mail from user name",
-                SenderEmail = "mail from ",
-                Account = "your email",
-                Password = "your password"
-            });
+            var provider = new MailKitProvider(
+                new MailKitOptions()
+                {
+                    Server = "smtp server address",
+                    Port = 25,
+                    SenderName = "mail from user name",
+                    SenderEmail = "mail from ",
+                    Account = "your email",
+                    Password = "your password"
+                }
+            );
 
             _EmailService = new EmailService(provider);
 
@@ -33,7 +35,9 @@ namespace NETCore.MailKit.Tests
         public void Send_Email_WithNoMailTo_Test()
         {
             //Act
-            var excetpion = Record.Exception(() => _EmailService.Send("", "Test MailKit Extensions", "Hello MailKit"));
+            var excetpion = Record.Exception(
+                () => _EmailService.Send("", "Test MailKit Extensions", "Hello MailKit")
+            );
 
             //Assert
             Assert.IsType<ArgumentException>(excetpion);
@@ -55,19 +59,25 @@ namespace NETCore.MailKit.Tests
         [Fact(DisplayName = "MailHtmlBodyTest")]
         public void Send_Email_Hmtl_Test()
         {
-            _EmailService.Send(_MailToOne, "Test MailKit Extensions Html Body", "<html><h1>Hello MailKit<h1><br/><p style='font-size:18px;color:red'>Font size is 18px ,color is red</p></html>", true);
+            _EmailService.Send(
+                _MailToOne,
+                "Test MailKit Extensions Html Body",
+                "<html><h1>Hello MailKit<h1><br/><p style='font-size:18px;color:red'>Font size is 18px ,color is red</p></html>",
+                true
+            );
         }
 
         [Fact(DisplayName = "MailAttachmentsTest")]
         public void Send_Email_Attachments_Test()
         {
-            string[] listAttch = new string[] 
-            { 
-                "", 
-                "" 
-            };
+            string[] listAttch = new string[] { "", "" };
 
-            _EmailService.Send(_MailToOne, "Test MailKit Extensions with Attachments", "Hello MailKit", listAttch);
+            _EmailService.Send(
+                _MailToOne,
+                "Test MailKit Extensions with Attachments",
+                "Hello MailKit",
+                listAttch
+            );
         }
     }
 }

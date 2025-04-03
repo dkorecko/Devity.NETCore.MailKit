@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Devity.NETCore.MailKit.Core;
 using Microsoft.AspNetCore.Mvc;
-using NETCore.MailKit.Core;
 
-namespace NETCore.MailKit.Web.Controllers
+namespace Devity.NETCore.MailKit.Web.Controllers
 {
     public class HomeController : Controller
     {
@@ -39,11 +39,14 @@ namespace NETCore.MailKit.Web.Controllers
         {
             ViewData["Message"] = "ASP.NET Core mvc send email example";
 
-            _EmailService.Send("shenbo.128@163.com", "ASP.NET Core mvc send email example", "Send from asp.net core mvc action");
+            _EmailService.Send(
+                "shenbo.128@163.com",
+                "ASP.NET Core mvc send email example",
+                "Send from asp.net core mvc action"
+            );
 
             return View();
         }
-
 
         public IActionResult Error()
         {

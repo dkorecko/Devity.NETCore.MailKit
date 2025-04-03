@@ -1,10 +1,9 @@
+using Devity.NETCore.MailKit.Infrastructure.Internal;
 using MailKit.Net.Imap;
 using MailKit.Net.Pop3;
 using MailKit.Net.Smtp;
-using NETCore.MailKit.Infrastructure.Internal;
-using System;
 
-namespace NETCore.MailKit
+namespace Devity.NETCore.MailKit
 {
     public interface IMailKitProvider
     {

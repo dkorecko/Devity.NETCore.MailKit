@@ -1,4 +1,4 @@
-﻿namespace NETCore.MailKit.Infrastructure.Internal
+﻿namespace Devity.NETCore.MailKit.Infrastructure.Internal
 {
     public class SenderInfo
     {

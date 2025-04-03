@@ -1,0 +1,18 @@
+@page "/"
+@using Devity.NETCore.MailKit.Core
+@inject IEmailService _emailService
+
+<PageTitle>Home</PageTitle>
+
+<h1>Hello, world!</h1>
+
+Welcome to your new app.
+
+<button @onclick=SendEmail>Send e-mail</button>
+
+@code {
+    public async Task SendEmail()
+    {
+        await _emailService.SendAsync("to@to.com", "Testing subject", "Testing message");
+    }
+}

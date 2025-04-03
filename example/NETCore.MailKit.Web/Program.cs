@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
-namespace NETCore.MailKit.Web
+namespace Devity.NETCore.MailKit.Web
 {
     public class Program
     {
@@ -14,11 +14,11 @@ namespace NETCore.MailKit.Web
         public static IHostBuilder CreateWebHostBuilder(string[] args)
         {
             return Host.CreateDefaultBuilder(args)
-                 .ConfigureWebHostDefaults(webBuilder =>
-                 {
-                     webBuilder.UseStartup<Startup>();
-                     webBuilder.UseContentRoot(Directory.GetCurrentDirectory());
-                 });
+                .ConfigureWebHostDefaults(webBuilder =>
+                {
+                    webBuilder.UseStartup<Startup>();
+                    webBuilder.UseContentRoot(Directory.GetCurrentDirectory());
+                });
         }
     }
 }

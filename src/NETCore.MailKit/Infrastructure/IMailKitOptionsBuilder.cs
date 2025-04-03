@@ -1,10 +1,7 @@
+using Devity.NETCore.MailKit.Infrastructure.Internal;
 using Microsoft.Extensions.DependencyInjection;
-using NETCore.MailKit.Infrastructure.Internal;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace NETCore.MailKit.Infrastructure
+namespace Devity.NETCore.MailKit.Infrastructure
 {
     public interface IMailKitOptionsBuilder
     {
@@ -19,6 +16,9 @@ namespace NETCore.MailKit.Infrastructure
         /// <param name="options">redis options</param>
         /// <param name="lifetime"></param>
         /// <returns></returns>
-        IMailKitOptionsBuilder UseMailKit(MailKitOptions options, ServiceLifetime lifetime = ServiceLifetime.Scoped);
+        IMailKitOptionsBuilder UseMailKit(
+            MailKitOptions options,
+            ServiceLifetime lifetime = ServiceLifetime.Scoped
+        );
     }
 }

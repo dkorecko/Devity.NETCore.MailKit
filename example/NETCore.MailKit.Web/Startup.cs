@@ -2,17 +2,17 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Devity.NETCore.MailKit.Extensions;
+using Devity.NETCore.MailKit.Infrastructure.Internal;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using NETCore.MailKit.Extensions;
-using NETCore.MailKit.Infrastructure.Internal;
 using Microsoft.Extensions.Logging.Debug;
 
-namespace NETCore.MailKit.Web
+namespace Devity.NETCore.MailKit.Web
 {
     public class Startup
     {
@@ -50,23 +50,29 @@ namespace NETCore.MailKit.Web
             //Add MailKit
             services.AddMailKit(optionBuilder =>
             {
-                optionBuilder.UseMailKit(new MailKitOptions()
-                {
-                    //get options from sercets.json
-                    Server = Configuration["Server"],
-                    Port = Convert.ToInt32(Configuration["Port"]),
-                    SenderName = Configuration["SenderName"],
-                    SenderEmail = Configuration["SenderEmail"],
+                optionBuilder.UseMailKit(
+                    new MailKitOptions()
+                    {
+                        //get options from sercets.json
+                        Server = Configuration["Server"],
+                        Port = Convert.ToInt32(Configuration["Port"]),
+                        SenderName = Configuration["SenderName"],
+                        SenderEmail = Configuration["SenderEmail"],
 
-                    //can be optional with no authentication 
-                    Account = Configuration["Account"],
-                    Password = Configuration["Password"]
-                });
+                        //can be optional with no authentication
+                        Account = Configuration["Account"],
+                        Password = Configuration["Password"]
+                    }
+                );
             });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(
+            IApplicationBuilder app,
+            IHostEnvironment env,
+            ILoggerFactory loggerFactory
+        )
         {
             if (env.IsDevelopment())
             {

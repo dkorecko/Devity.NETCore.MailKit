@@ -1,10 +1,10 @@
 # NETCore.MailKit
 
-[![NuGet](https://img.shields.io/nuget/v/NETCore.MailKit.svg)](https://nuget.org/packages/NETCore.MailKit)
+[![NuGet](https://img.shields.io/nuget/v/Devity.NETCore.MailKit.svg)](https://nuget.org/packages/Devity.NETCore.MailKit)
 [![NETCore CLR](https://img.shields.io/badge/.NETCore%20Clr-3.1-brightgreen)](https://www.microsoft.com/net/core)
 [![MailKit](https://img.shields.io/badge/MailKit-2.6.0-orange)](https://github.com/jstedfast/MailKit)
-[![license](https://img.shields.io/github/license/myloveCc/NETCore.MailKit.svg)](https://github.com/myloveCc/NETCore.MailKit/blob/master/lICENSE)
-[![GitHub-Actions-Img]](https://github.com/myloveCc/NETCore.MailKit/actions)
+[![license](https://img.shields.io/github/license/dkorecko/Devity.NETCore.MailKit.svg)](https://github.com/dkorecko/Devity.NETCore.MailKit/blob/master/LICENSE)
+[![GitHub-Actions-Img]](https://github.com/dkorecko/Devity.NETCore.MailKit/actions)
 
 [GitHub-Actions-Img]:https://github.com/myloveCc/NETCore.MailKit/workflows/build/badge.svg
 
@@ -12,12 +12,12 @@ MailKit extension for asp.net core
 # Install with nuget
 
 ```
-Install-Package NETCore.MailKit -Version 2.1.0
+Install-Package Devity.NETCore.MailKit
 ```
 
 # Install with .NET CLI
 ```
-dotnet add package NETCore.MailKit --version 2.1.0
+dotnet add package Devity.NETCore.MailKit
 ```
 
 # How to use

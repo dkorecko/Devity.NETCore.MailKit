@@ -18,7 +18,7 @@
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.14.0" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\src\NETCore.MailKit\NETCore.MailKit.csproj" />
+    <ProjectReference Include="..\..\src\NETCore.MailKit\Devity.NETCore.MailKit.csproj" />
   </ItemGroup>
 
 </Project>

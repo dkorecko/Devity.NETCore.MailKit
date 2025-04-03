@@ -1,15 +1,13 @@
-using NETCore.MailKit.Infrastructure.Internal;
 using System;
-using System.Collections.Generic;
-using System.Text;
+using Devity.NETCore.MailKit.Infrastructure.Internal;
+using MailKit.Net.Imap;
+using MailKit.Net.Pop3;
 using MailKit.Net.Smtp;
 using MailKit.Security;
-using MailKit.Net.Pop3;
-using MailKit.Net.Imap;
 
-namespace NETCore.MailKit
+namespace Devity.NETCore.MailKit
 {
-    public class MailKitProvider:IMailKitProvider
+    public class MailKitProvider : IMailKitProvider
     {
         public MailKitOptions Options { get; private set; }
 
@@ -22,11 +20,9 @@ namespace NETCore.MailKit
 
         public SmtpClient SmtpClient
         {
-            get
-            {
-                return lazySmtpClient().Value;
-            }
+            get { return lazySmtpClient().Value; }
         }
+
         private Lazy<SmtpClient> lazySmtpClient()
         {
             return new Lazy<SmtpClient>(() =>
@@ -40,7 +36,6 @@ namespace NETCore.MailKit
             var client = new SmtpClient();
 
             client.ServerCertificateValidationCallback = (s, c, h, e) => true;
-
 
             if (!Options.Security)
             {
@@ -70,11 +65,9 @@ namespace NETCore.MailKit
         #region Pop3
         public Pop3Client Pop3Client
         {
-            get
-            {
-                return lazyPop3Client().Value;
-            }
+            get { return lazyPop3Client().Value; }
         }
+
         private Lazy<Pop3Client> lazyPop3Client()
         {
             return new Lazy<Pop3Client>(() =>
@@ -104,11 +97,9 @@ namespace NETCore.MailKit
         #region Imap
         public ImapClient ImapClient
         {
-            get
-            {
-                return lazyImapClient().Value;
-            }
+            get { return lazyImapClient().Value; }
         }
+
         private Lazy<ImapClient> lazyImapClient()
         {
             return new Lazy<ImapClient>(() =>
@@ -132,6 +123,5 @@ namespace NETCore.MailKit
             return client;
         }
         #endregion
-
     }
 }

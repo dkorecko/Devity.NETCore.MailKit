@@ -1,12 +1,10 @@
-using Microsoft.Extensions.DependencyInjection;
-using System;
 using System.Collections.Generic;
-using System.Text;
-using NETCore.MailKit.Infrastructure.Internal;
+using Devity.NETCore.MailKit.Core;
+using Devity.NETCore.MailKit.Infrastructure.Internal;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using NETCore.MailKit.Core;
 
-namespace NETCore.MailKit.Infrastructure
+namespace Devity.NETCore.MailKit.Infrastructure
 {
     public class MailKitOptionsBuilder : IMailKitOptionsBuilder
     {
@@ -30,10 +28,15 @@ namespace NETCore.MailKit.Infrastructure
         /// <param name="options"></param>
         /// <param name="lifetime"></param>
         /// <returns></returns>
-        public IMailKitOptionsBuilder UseMailKit(MailKitOptions options, ServiceLifetime lifetime = ServiceLifetime.Scoped)
+        public IMailKitOptionsBuilder UseMailKit(
+            MailKitOptions options,
+            ServiceLifetime lifetime = ServiceLifetime.Scoped
+        )
         {
             AddProviderService(options);
-            serviceCollection.TryAdd(new ServiceDescriptor(typeof(IEmailService), typeof(EmailService), lifetime));
+            serviceCollection.TryAdd(
+                new ServiceDescriptor(typeof(IEmailService), typeof(EmailService), lifetime)
+            );
             return this;
         }
 

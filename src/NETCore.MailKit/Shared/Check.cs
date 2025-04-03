@@ -1,35 +1,29 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.IO;
 
-namespace NETCore.MailKit.Shared
+namespace Devity.NETCore.MailKit.Shared
 {
     internal class Check
     {
-        internal Check()
-        {
-
-        }
+        internal Check() { }
 
         internal class Argument
         {
-            internal Argument()
-            {
-            }
+            internal Argument() { }
 
             internal static void IsNotValid(string argument, string argumentName)
             {
                 throw new ArgumentException($"\"{argumentName}\" cannot be valide .", argumentName);
-
             }
 
             internal static void IsNotEmpty(Guid argument, string argumentName)
             {
                 if (argument == Guid.Empty)
                 {
-                    throw new ArgumentException($"\"{argumentName}\" cannot be empty guid.", argumentName);
+                    throw new ArgumentException(
+                        $"\"{argumentName}\" cannot be empty guid.",
+                        argumentName
+                    );
                 }
             }
 
@@ -37,7 +31,10 @@ namespace NETCore.MailKit.Shared
             {
                 if (string.IsNullOrEmpty((argument ?? string.Empty).Trim()))
                 {
-                    throw new ArgumentException($"\"{argumentName}\" cannot be emtpy .", argumentName);
+                    throw new ArgumentException(
+                        $"\"{argumentName}\" cannot be emtpy .",
+                        argumentName
+                    );
                 }
             }
 
@@ -45,11 +42,18 @@ namespace NETCore.MailKit.Shared
             {
                 if (argument.Trim().Length > length)
                 {
-                    throw new ArgumentException($"\"{argumentName}\" not out of {length} character.", argumentName);
+                    throw new ArgumentException(
+                        $"\"{argumentName}\" not out of {length} character.",
+                        argumentName
+                    );
                 }
             }
 
-            internal static void IsNotNull(object argument, string argumentName, string message = "")
+            internal static void IsNotNull(
+                object argument,
+                string argumentName,
+                string message = ""
+            )
             {
                 if (argument == null)
                 {
@@ -80,6 +84,7 @@ namespace NETCore.MailKit.Shared
                     throw new ArgumentOutOfRangeException(argumentName);
                 }
             }
+
             internal static void IsNotNegativeOrZero(long argument, string argumentName)
             {
                 if (argument <= 0)
@@ -103,6 +108,7 @@ namespace NETCore.MailKit.Shared
                     throw new ArgumentOutOfRangeException(argumentName);
                 }
             }
+
             internal static void IsNotNegative(decimal argument, string argumentName)
             {
                 if (argument < 0)
@@ -171,11 +177,20 @@ namespace NETCore.MailKit.Shared
                     throw new ArgumentException("collection not be empty.", argumentName);
                 }
             }
-            internal static void IsNotOutOfRange(int argument, int min, int max, string argumentName)
+
+            internal static void IsNotOutOfRange(
+                int argument,
+                int min,
+                int max,
+                string argumentName
+            )
             {
                 if ((argument < min) || (argument > max))
                 {
-                    throw new ArgumentOutOfRangeException(argumentName, $"{argumentName} must be in range \"{min}\"-\"{max}\".");
+                    throw new ArgumentOutOfRangeException(
+                        argumentName,
+                        $"{argumentName} must be in range \"{min}\"-\"{max}\"."
+                    );
                 }
             }
         }
