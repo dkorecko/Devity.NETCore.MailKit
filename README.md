@@ -1,7 +1,7 @@
 # NETCore.MailKit
 
 [![NuGet](https://img.shields.io/nuget/v/Devity.NETCore.MailKit.svg)](https://nuget.org/packages/Devity.NETCore.MailKit)
-[![MailKit](https://img.shields.io/badge/MailKit-2.6.0-orange)](https://github.com/jstedfast/MailKit)
+[![MailKit](https://img.shields.io/badge/MailKit-4.11.0-orange)](https://github.com/jstedfast/MailKit)
 [![license](https://img.shields.io/github/license/dkorecko/Devity.NETCore.MailKit.svg)](https://github.com/dkorecko/Devity.NETCore.MailKit/blob/master/LICENSE)
 [![GitHub-Actions-Img](https://github.com/dkorecko/Devity.NETCore.MailKit/workflows/build/badge.svg)](https://github.com/dkorecko/Devity.NETCore.MailKit/actions)
 
