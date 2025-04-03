@@ -1,0 +1,39 @@
+name: Publish NuGet Package
+
+on:
+  workflow_call:
+    secrets:
+      NUGET_API_KEY:
+        required: true
+  workflow_dispatch:
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.x
+
+      - name: Build and test
+        working-directory: ./src/Devity.NETCore.MailKit
+        run: |
+          dotnet build --configuration Release
+        #  dotnet test --configuration Release --no-build
+
+      - name: Package
+        working-directory: ./src/Devity.NETCore.MailKit
+        run: dotnet pack --configuration Release --no-build
+
+      - name: Publish
+        working-directory: ./src/Devity.NETCore.MailKit
+        run: |
+          cd bin/Release
+          dotnet nuget push *.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
