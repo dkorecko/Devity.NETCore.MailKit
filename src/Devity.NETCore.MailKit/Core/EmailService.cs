@@ -432,7 +432,7 @@ namespace Devity.NETCore.MailKit.Core
             Check.Argument.IsNotEmpty(_to, nameof(mailTo));
             Check.Argument.IsNotEmpty(message, nameof(message));
 
-            var mimeMessage = new MimeMessage();
+            using var mimeMessage = new MimeMessage();
 
             //add mail from
             if (
