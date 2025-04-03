@@ -26,17 +26,17 @@ jobs:
           dotnet-version: 8.x
 
       - name: Build and test
-        working-directory: ${WORKING_DIRECTORY}
+        working-directory: $WORKING_DIRECTORY
         run: |
           dotnet build --configuration Release
         #  dotnet test --configuration Release --no-build
 
       - name: Package
-        working-directory: ${WORKING_DIRECTORY}
+        working-directory: $WORKING_DIRECTORY
         run: dotnet pack --configuration Release --no-build
 
       - name: Publish
-        working-directory: ${WORKING_DIRECTORY}
+        working-directory: $WORKING_DIRECTORY
         run: |
           cd bin
           ls
