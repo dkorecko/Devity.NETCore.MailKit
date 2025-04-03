@@ -23,15 +23,16 @@ jobs:
           dotnet-version: 8.x
 
       - name: Build and test
+        working-directory: ./src/Devity.NETCore.MailKit
         run: |
           dotnet build --configuration Release
         #  dotnet test --configuration Release --no-build
 
       - name: Package
+        working-directory: ./src/Devity.NETCore.MailKit
         run: dotnet pack --configuration Release --no-build
 
       - name: Publish
+        working-directory: ./src/Devity.NETCore.MailKit
         run: |
-          cd bin
-          ls
           dotnet nuget push */*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
