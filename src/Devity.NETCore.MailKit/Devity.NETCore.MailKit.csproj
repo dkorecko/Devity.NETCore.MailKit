@@ -3,18 +3,19 @@
   <PropertyGroup>
     <TargetFrameworks>net8.0</TargetFrameworks>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Version>2.2.0</Version>
+    <Version>2.2.1</Version>
     <Authors>Lvcc, Dávid Korečko (dkorecko)</Authors>
     <Company />
     <Description>Maintained MailKit extension for ASP.NET Core. Send e-mail easily in an ASP.NET Core project. See release notes at: https://github.com/dkorecko/Devity.NETCore.MailKit/releases</Description>
     <Copyright>Copyright 2017-2025 (c) Lvcc, Dávid Korečko. All rights reserved</Copyright>
     <PackageProjectUrl>https://github.com/dkorecko/Devity.NETCore.MailKit</PackageProjectUrl>
     <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <RepositoryUrl>https://github.com/dkorecko/Devity.NETCore.MailKit</RepositoryUrl>
     <PackageTags>MailKit ASP.NET Devity Email SMTP</PackageTags>
     <RepositoryType>git</RepositoryType>
-    <AssemblyVersion>2.2.0</AssemblyVersion>
-    <FileVersion>2.2.0</FileVersion>
+    <AssemblyVersion>2.2.1</AssemblyVersion>
+    <FileVersion>2.2.1</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -25,6 +26,7 @@
 
   <ItemGroup Label="Resources">
     <None Include="..\..\README.md" Pack="true" PackagePath="\" />
+    <None Include="..\..\LICENSE" Pack="true" PackagePath="\" />
   </ItemGroup>
 
   <ItemGroup>
