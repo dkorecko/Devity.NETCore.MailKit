@@ -325,5 +325,42 @@ namespace Devity.NETCore.MailKit.Core
             bool isHtml = false,
             SenderInfo sender = null
         );
+
+        /// <summary>
+        /// send a multipart/alternative email (both an HTML and a plain-text body, so clients
+        /// that render HTML get the rich version while others fall back to plain text)
+        /// </summary>
+        /// <param name="mailTo">consignee email,multi split with ","</param>
+        /// <param name="subject">subject</param>
+        /// <param name="htmlMessage">the HTML body</param>
+        /// <param name="plainTextMessage">the plain-text body</param>
+        /// <param name="attachments"></param>
+        /// <param name="sender">from</param>
+        void SendMultipart(
+            string mailTo,
+            string subject,
+            string htmlMessage,
+            string plainTextMessage,
+            string[] attachments = null,
+            SenderInfo sender = null
+        );
+
+        /// <summary>
+        /// send a multipart/alternative email (both an HTML and a plain-text body) async
+        /// </summary>
+        /// <param name="mailTo">consignee email,multi split with ","</param>
+        /// <param name="subject">subject</param>
+        /// <param name="htmlMessage">the HTML body</param>
+        /// <param name="plainTextMessage">the plain-text body</param>
+        /// <param name="attachments"></param>
+        /// <param name="sender">from</param>
+        Task SendMultipartAsync(
+            string mailTo,
+            string subject,
+            string htmlMessage,
+            string plainTextMessage,
+            string[] attachments = null,
+            SenderInfo sender = null
+        );
     }
 }

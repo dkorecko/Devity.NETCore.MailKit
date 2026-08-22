@@ -396,6 +396,131 @@ namespace Devity.NETCore.MailKit.Core
             });
         }
 
+        public void SendMultipart(
+            string mailTo,
+            string subject,
+            string htmlMessage,
+            string plainTextMessage,
+            string[] attachments = null,
+            SenderInfo sender = null
+        )
+        {
+            SendMultipartEmail(mailTo, subject, htmlMessage, plainTextMessage, sender, attachments);
+        }
+
+        public Task SendMultipartAsync(
+            string mailTo,
+            string subject,
+            string htmlMessage,
+            string plainTextMessage,
+            string[] attachments = null,
+            SenderInfo sender = null
+        )
+        {
+            return Task.Factory.StartNew(() =>
+            {
+                SendMultipartEmail(mailTo, subject, htmlMessage, plainTextMessage, sender, attachments);
+            });
+        }
+
+        /// <summary>
+        /// builds and sends a multipart/alternative (HTML + plain-text) message, optionally
+        /// wrapped in multipart/mixed if attachments are present - mirrors <see cref="SendEmail"/>
+        /// but with a TextPart for each of the html/plain-text bodies instead of just one.
+        /// </summary>
+        private void SendMultipartEmail(
+            string mailTo,
+            string subject,
+            string htmlMessage,
+            string plainTextMessage,
+            SenderInfo sender = null,
+            string[] attachments = default
+        )
+        {
+            var _to = new string[0];
+            if (!string.IsNullOrEmpty(mailTo))
+                _to = mailTo.Split(',').Select(x => x.Trim()).ToArray();
+
+            Check.Argument.IsNotEmpty(_to, nameof(mailTo));
+            Check.Argument.IsNotEmpty(htmlMessage, nameof(htmlMessage));
+            Check.Argument.IsNotEmpty(plainTextMessage, nameof(plainTextMessage));
+
+            using var mimeMessage = new MimeMessage();
+
+            //add mail from
+            if (
+                !string.IsNullOrEmpty(sender?.SenderEmail)
+                && !string.IsNullOrEmpty(sender?.SenderName)
+            )
+            {
+                mimeMessage.From.Add(new MailboxAddress(sender.SenderName, sender.SenderEmail));
+            }
+            else
+            {
+                mimeMessage.From.Add(
+                    new MailboxAddress(
+                        _MailKitProvider.Options.SenderName,
+                        _MailKitProvider.Options.SenderEmail
+                    )
+                );
+            }
+
+            //add mail to
+            foreach (var to in _to)
+            {
+                mimeMessage.To.Add(MailboxAddress.Parse(to));
+            }
+
+            //add subject
+            mimeMessage.Subject = subject;
+
+            //add html + plain-text alternative body
+            var textBody = new TextPart(TextFormat.Text);
+            textBody.SetText(Encoding.UTF8, plainTextMessage);
+
+            var htmlBody = new TextPart(TextFormat.Html);
+            htmlBody.SetText(Encoding.UTF8, htmlMessage);
+
+            // order matters: mail clients pick the last part they understand, so html goes last
+            Multipart bodyPart = new Multipart("alternative") { textBody, htmlBody };
+
+            MimeEntity finalBody = bodyPart;
+
+            // add attachments
+            if (attachments != null && attachments.Length > 0)
+            {
+                var multipartBody = new Multipart("mixed") { bodyPart };
+                foreach (var attach in attachments)
+                {
+                    var mimeType = MimeTypes.GetMimeType(attach).Split('/');
+                    multipartBody.Add(
+                        new MimePart(mimeType[0], mimeType[1])
+                        {
+                            IsAttachment = true,
+                            Content = new MimeContent(
+                                File.OpenRead(attach),
+                                ContentEncoding.Default
+                            ),
+                            ContentDisposition = new ContentDisposition(
+                                ContentDisposition.Attachment
+                            ),
+                            ContentTransferEncoding = ContentEncoding.Base64,
+                            FileName = Path.GetFileName(attach),
+                        }
+                    );
+                }
+                finalBody = multipartBody;
+            }
+
+            //set email body
+            mimeMessage.Body = finalBody;
+
+            using (var client = _MailKitProvider.SmtpClient)
+            {
+                client.Send(mimeMessage);
+            }
+        }
+
         /// <summary>
         ///
         /// </summary>
