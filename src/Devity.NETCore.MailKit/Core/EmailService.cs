@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -402,10 +403,11 @@ namespace Devity.NETCore.MailKit.Core
             string htmlMessage,
             string plainTextMessage,
             string[] attachments = null,
-            SenderInfo sender = null
+            SenderInfo sender = null,
+            IDictionary<string, string> extraHeaders = null
         )
         {
-            SendMultipartEmail(mailTo, subject, htmlMessage, plainTextMessage, sender, attachments);
+            SendMultipartEmail(mailTo, subject, htmlMessage, plainTextMessage, sender, attachments, extraHeaders);
         }
 
         public Task SendMultipartAsync(
@@ -414,12 +416,13 @@ namespace Devity.NETCore.MailKit.Core
             string htmlMessage,
             string plainTextMessage,
             string[] attachments = null,
-            SenderInfo sender = null
+            SenderInfo sender = null,
+            IDictionary<string, string> extraHeaders = null
         )
         {
             return Task.Factory.StartNew(() =>
             {
-                SendMultipartEmail(mailTo, subject, htmlMessage, plainTextMessage, sender, attachments);
+                SendMultipartEmail(mailTo, subject, htmlMessage, plainTextMessage, sender, attachments, extraHeaders);
             });
         }
 
@@ -434,7 +437,8 @@ namespace Devity.NETCore.MailKit.Core
             string htmlMessage,
             string plainTextMessage,
             SenderInfo sender = null,
-            string[] attachments = default
+            string[] attachments = default,
+            IDictionary<string, string> extraHeaders = null
         )
         {
             var _to = new string[0];
@@ -473,6 +477,15 @@ namespace Devity.NETCore.MailKit.Core
 
             //add subject
             mimeMessage.Subject = subject;
+
+            //add any additional raw headers (e.g. List-Unsubscribe / List-Unsubscribe-Post)
+            if (extraHeaders != null)
+            {
+                foreach (var header in extraHeaders)
+                {
+                    mimeMessage.Headers.Add(header.Key, header.Value);
+                }
+            }
 
             //add html + plain-text alternative body
             var textBody = new TextPart(TextFormat.Text);

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using Devity.NETCore.MailKit.Infrastructure.Internal;
@@ -336,13 +337,15 @@ namespace Devity.NETCore.MailKit.Core
         /// <param name="plainTextMessage">the plain-text body</param>
         /// <param name="attachments"></param>
         /// <param name="sender">from</param>
+        /// <param name="extraHeaders">additional raw message headers to set (e.g. List-Unsubscribe), keyed by header name</param>
         void SendMultipart(
             string mailTo,
             string subject,
             string htmlMessage,
             string plainTextMessage,
             string[] attachments = null,
-            SenderInfo sender = null
+            SenderInfo sender = null,
+            IDictionary<string, string> extraHeaders = null
         );
 
         /// <summary>
@@ -354,13 +357,15 @@ namespace Devity.NETCore.MailKit.Core
         /// <param name="plainTextMessage">the plain-text body</param>
         /// <param name="attachments"></param>
         /// <param name="sender">from</param>
+        /// <param name="extraHeaders">additional raw message headers to set (e.g. List-Unsubscribe), keyed by header name</param>
         Task SendMultipartAsync(
             string mailTo,
             string subject,
             string htmlMessage,
             string plainTextMessage,
             string[] attachments = null,
-            SenderInfo sender = null
+            SenderInfo sender = null,
+            IDictionary<string, string> extraHeaders = null
         );
     }
 }
