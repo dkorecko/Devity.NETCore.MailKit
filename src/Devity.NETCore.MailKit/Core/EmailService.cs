@@ -528,10 +528,7 @@ namespace Devity.NETCore.MailKit.Core
             //set email body
             mimeMessage.Body = finalBody;
 
-            using (var client = _MailKitProvider.SmtpClient)
-            {
-                client.Send(mimeMessage);
-            }
+            SendWithSharedClient(mimeMessage);
         }
 
         /// <summary>
@@ -653,9 +650,26 @@ namespace Devity.NETCore.MailKit.Core
             //set email body
             mimeMessage.Body = multipartBody;
 
-            using (var client = _MailKitProvider.SmtpClient)
+            SendWithSharedClient(mimeMessage);
+        }
+
+        /// <summary>
+        /// Sends through <see cref="_MailKitProvider"/>'s shared, reused SmtpClient - never disposed
+        /// here, since its connection lifetime is owned by the provider (see MailKitProvider.Dispose),
+        /// not by an individual send. Serialized via SmtpLock since that shared client is not safe for
+        /// concurrent use (this provider may be a DI singleton reached from multiple requests, or a
+        /// caller sending a paced batch on more than one thread).
+        /// </summary>
+        private void SendWithSharedClient(MimeMessage mimeMessage)
+        {
+            _MailKitProvider.SmtpLock.Wait();
+            try
             {
-                client.Send(mimeMessage);
+                _MailKitProvider.SmtpClient.Send(mimeMessage);
+            }
+            finally
+            {
+                _MailKitProvider.SmtpLock.Release();
             }
         }
     }
